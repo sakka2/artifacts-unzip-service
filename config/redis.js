@@ -4,7 +4,7 @@ const config = require('config');
 
 const queueConfig = config.get('queue');
 const redisConfig = queueConfig.redisConnection;
-const connectionDetails = {
+export const connectionDetails = {
     pkg: 'ioredis',
     host: redisConfig.host,
     options: {
@@ -14,9 +14,4 @@ const connectionDetails = {
     port: redisConfig.port,
     database: redisConfig.database
 };
-const queuePrefix = queueConfig.prefix || '';
-
-module.exports = {
-    connectionDetails,
-    queuePrefix
-};
+export const queuePrefix = queueConfig.prefix || '';

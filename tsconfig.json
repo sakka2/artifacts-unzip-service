@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "lib": [ "es2020" ],
+        // "jsx": "preserve",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        /* Modules */
+        "module": "commonjs",
+        "rootDir": ".",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        //"types": [ "node-resque"],
+        "resolveJsonModule": true,
+
+        /* JavaScript Support */
+        // "allowJs": true,
+        // "checkJs": true,
+
+        /* Emit */
+        "declaration": true,
+        "declarationMap": true,
+        // "outFile": "./",
+        // "outDir": "dist",
+
+        /* Interop Constraints */
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+
+        /* Type Checking */
+        "strict": true,
+
+        /* Completeness */
+        "skipLibCheck": true,
+    },
+    "include": ["**/*.ts", "index.js"],
+    "exclude": ["node_modules"],
+}
