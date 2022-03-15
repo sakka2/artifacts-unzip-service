@@ -4,9 +4,10 @@
   "description": "A resque worker implementation that unzips the ZIP artifacts.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "pretest": "eslint . --quiet",
-    "test": "nyc --report-dir ./artifacts/coverage --reporter=lcov mocha --reporter mocha-multi-reporters --reporter-options configFile=./mocha.config.json --recursive --timeout 4000 --retries 1 --exit --allow-uncaught true --color true",
+    "start": "npm run build && node index",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "test": "npm run build && nyc --report-dir ./artifacts/coverage --reporter=lcov mocha --reporter mocha-multi-reporters --reporter-options configFile=./mocha.config.json --recursive --timeout 4000 --retries 1 --exit --allow-uncaught true --color true",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -26,8 +27,15 @@
     "config": "^3.3.6",
     "got": "^11.8.3",
     "js-yaml": "^4.1.0",
-    "node-resque": "^5.5.3",
-    "screwdriver-logger": "^1.1.0"
+    "node-resque": "^6.0.9",
+    "screwdriver-logger": "^1.1.0",
+    "typescript": "^4.6.2",
+    "@types/adm-zip": "^0.4.34",
+    "@types/config": "0.0.41",
+    "@types/got": "^9.6.12",
+    "@types/hapi__hapi": "^20.0.10",
+    "@types/node": "^17.0.21",
+    "@types/node-resque": "^5.5.3"
   },
   "devDependencies": {
     "chai": "^4.3.4",

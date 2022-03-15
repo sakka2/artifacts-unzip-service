@@ -1,15 +1,18 @@
 'use strict';
 
-const NodeResque = require('node-resque');
-const config = require('config');
-const logger = require('screwdriver-logger');
-const jobs = require('./lib/jobs');
-const server = require('./lib/server');
-const { connectionDetails, queuePrefix } = require('./config/redis');
-const workerConfig = config.get('unzip-service');
-const httpdConfig = config.get('httpd');
+import { MultiWorker } from 'node-resque';
+import config from 'config';
+import logger from 'screwdriver-logger';
+import jobs from './lib/jobs';
+import * as server from './lib/server';
+import { connectionDetails, queuePrefix } from './config/redis';
 
-const multiWorker = new NodeResque.MultiWorker(
+import { workerConfig, httpdConfig } from './types/config';
+
+const workerConfig: workerConfig = config.get('unzip-service');
+const httpdConfig: httpdConfig = config.get('httpd');
+
+const multiWorker = new MultiWorker(
     {
         connection: connectionDetails,
         queues: [`${queuePrefix}unzip`],
@@ -61,9 +64,6 @@ const boot = async () => {
     });
 
     // multiWorker emitters
-    multiWorker.on('internalError', error => {
-        logger.error(error);
-    });
     multiWorker.on('multiWorkerAction', (verb, delay) => {
         // Save the last emitted time of this event for health check.
         server.saveLastEmittedTime();
